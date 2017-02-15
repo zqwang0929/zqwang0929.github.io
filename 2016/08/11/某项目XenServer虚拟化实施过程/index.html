@@ -1,0 +1,485 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>某项目XenServer虚拟化实施过程 | zqwang&#39;blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="wang zhiqiang">
+    
+    <meta name="description" content="项目背景介绍该项目共有60台物理机，物理机配置为2颗XEON6核E5-2630，内存64GDDR3，4块600G硬盘SAS做Raid5，每台物理机有四个网口，由于现场网络环境和项目前期规划的限制，其中eth0做管理网，eth2和eth3做存储网；存储华为S5600T存储。虚拟化软件为浪潮的InCloudSphere4.0(ICS4.0)">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="zqwang0929" />
+    <meta name="twitter:title" content="某项目XenServer虚拟化实施过程 | zqwang&#39;blog" />
+      
+    
+    
+    <link rel="alternate" href="http://zhiqiang.space/atom.xml" title="zqwang&#39;blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="zqwang&#39;blog" title="zqwang&#39;blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="zqwang&#39;blog">zqwang&#39;blog</a></h1>
+				<h2 class="blog-motto">A rookie and a learner</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:zhiqiang.space">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/11/某项目XenServer虚拟化实施过程/" title="某项目XenServer虚拟化实施过程" itemprop="url">某项目XenServer虚拟化实施过程</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhiqiang.space" title="wang zhiqiang">wang zhiqiang</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-08-10T16:35:56.000Z" itemprop="datePublished">2016-08-11</time>
+    更新日期:<time datetime="2016-08-22T15:26:56.000Z" itemprop="dateModified">2016-08-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目背景介绍"><span class="toc-number">1.</span> <span class="toc-text">项目背景介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实施过程"><span class="toc-number">2.</span> <span class="toc-text">实施过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装物理机系统"><span class="toc-number">2.1.</span> <span class="toc-text">安装物理机系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装icenterics40管理客户端"><span class="toc-number">2.2.</span> <span class="toc-text">安装iCenter(ICS4.0管理客户端)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提条件"><span class="toc-number">2.2.1.</span> <span class="toc-text">前提条件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装过程"><span class="toc-number">2.2.2.</span> <span class="toc-text">安装过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加主机"><span class="toc-number">2.3.</span> <span class="toc-text">添加主机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加物理机到管理平台"><span class="toc-number">2.3.1.</span> <span class="toc-text">添加物理机到管理平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开多路径功能"><span class="toc-number">2.3.2.</span> <span class="toc-text">打开多路径功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置license"><span class="toc-number">2.4.</span> <span class="toc-text">配置license</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-number">2.4.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入证书管理服务器lts"><span class="toc-number">2.4.2.</span> <span class="toc-text">导入证书管理服务器LTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置lts"><span class="toc-number">2.4.3.</span> <span class="toc-text">配置LTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册物理机"><span class="toc-number">2.4.4.</span> <span class="toc-text">注册物理机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建资源池"><span class="toc-number">2.5.</span> <span class="toc-text">创建资源池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建主机池"><span class="toc-number">2.5.1.</span> <span class="toc-text">创建主机池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络设置"><span class="toc-number">2.6.</span> <span class="toc-text">网络设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ics40网络介绍"><span class="toc-number">2.6.1.</span> <span class="toc-text">ICS4.0网络介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管理网络"><span class="toc-number">2.6.2.</span> <span class="toc-text">管理网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟机网络设置"><span class="toc-number">2.6.3.</span> <span class="toc-text">虚拟机网络设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ics40存储网络设置"><span class="toc-number">2.6.4.</span> <span class="toc-text">ICS4.0存储网络设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加存储"><span class="toc-number">2.7.</span> <span class="toc-text">添加存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟机部署"><span class="toc-number">2.8.</span> <span class="toc-text">虚拟机部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建cifs库"><span class="toc-number">2.8.1.</span> <span class="toc-text">创建CIFS库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建虚拟机"><span class="toc-number">2.8.2.</span> <span class="toc-text">新建虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装操作系统"><span class="toc-number">2.8.3.</span> <span class="toc-text">安装操作系统</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="项目背景介绍"><a href="#项目背景介绍" class="headerlink" title="项目背景介绍"></a>项目背景介绍</h1><p>该项目共有60台物理机，物理机配置为2颗XEON6核E5-2630，内存64GDDR3，4块600G硬盘SAS做Raid5，每台物理机有四个网口，由于现场网络环境和项目前期规划的限制，其中eth0做管理网，eth2和eth3做存储网；存储华为S5600T存储。虚拟化软件为浪潮的InCloudSphere4.0(ICS4.0)</p>
+<a id="more"></a>
+<h1 id="实施过程"><a href="#实施过程" class="headerlink" title="实施过程"></a>实施过程</h1><h2 id="安装物理机系统"><a href="#安装物理机系统" class="headerlink" title="安装物理机系统"></a>安装物理机系统</h2><p>1、 使用ICS4.0 的安装光盘引导服务器启动。</p>
+<p>2、 按F2选择高级模式安装系统。<br>注：<em>1，安装前检查厂商提供的ICS硬件兼容列表，检查硬件的兼容性，部分硬件厂商需要使用硬件厂商的引导光盘安装操作系统。</em><br><em>2，ICS分别有两种安装模式，一种是标准模式，一种是高级模式，标准模式采用默认配置安装，高级模式可进入shell模式进行一些高级配置，如dom0内存和空间大小的配置等.</em><br><img src="F2.png" alt=""><br>3、 输入shell，回车。<br><img src="shell.png" alt=""><br><img src="shell2.png" alt=""><br>4、 编辑安装引导文件constans.py<br><img src="vi1.png" alt=""></p>
+<p>5、将GPT_SUPPORT=True改为False（禁用GPT分区，使用MBR分区表），将root_size=4096改成40960（即40G大小）。<br>注：root_size，Domain0的root卷大小，使用较大的 root 卷大小可以有效防止由于Dom0 日志的突然快速增长导致 root 卷空间被占满从而引起 Dom0 运行异常的情况发生。<br><img src="vi2.png" alt=""></p>
+<p>6、 保存后，输入exit退出shell模式。<br><img src="exit.png" alt=""></p>
+<p>7、 键盘选择“us”并“OK”继续<br><img src="keymap.png" alt=""><br>8、操作系统安装欢迎界面，选择“OK”继续安装。<br><img src="sp160810_151849.png" alt=""><br>9、 最终用户许可协议，选择“Accept EULA”继续安装。<br><img src="EULA.png" alt=""></p>
+<p>10、 选择操作系统要安装的存储，默认选择本地服务器的磁盘阵列。<br>注：1，本地磁盘预先做好RAID。 2，thin provisioning功能需配合桌面虚拟化功能，如只是服务器虚拟化可不用开启。<br><img src="virtualstor.png" alt=""></p>
+<p>11、 选择“Local media”并继续安装。<br><img src="source.png" alt=""></p>
+<p>12、选择不安装系统的补丁包。<br><img src="packs.png" alt=""></p>
+<p>13、 选择不验证安装介质。<br><img src="verify.png" alt=""></p>
+<p>14、 设置密码。<br><img src="passwd.png" alt=""></p>
+<p>15、 选择服务器管理网络的网口。<br> 注：项目定义的eth2和eth3为存储数据网，eth0做为管理网和业务网。<br><img src="networking.png" alt=""></p>
+<p>16、 输入管理网的IP地址。<br><img src="networking2.png" alt=""></p>
+<p>17、按命名规则输入HostName（参考附录“服务器命名规范”），并输入DNS。<br><img src="hostname.png" alt=""></p>
+<p>18、 选择时区。<br><img src="timezone.png" alt=""><br><img src="timezone2.png" alt=""></p>
+<p>19、 设置NTP服务地址<br>注：<em>因ICS4.0旗舰版对时间的要求非常高，所以建议给每台服务器配置NTP，如果实在没有，手动将服务器BIOS及系统的时间修改为一致（BIOS时间比系统时间慢8小时）</em><br><img src="ntp01.png" alt=""><br><img src="ntp02.png" alt=""></p>
+<p>20、 选择安装系统。<br><img src="install.png" alt=""><br><img src="install2.png" alt=""></p>
+<p>21、 安装完毕，重启机器。</p>
+<h2 id="安装icenterics40管理客户端"><a href="#安装iCenter-ICS4-0管理客户端" class="headerlink" title="安装iCenter(ICS4.0管理客户端)"></a>安装iCenter(ICS4.0管理客户端)</h2><h3 id="前提条件"><a href="#前提条件：" class="headerlink" title="前提条件："></a>前提条件：</h3><p>1、    准备好iCenter的安装文件。<br>2、    一台与管理网IP地址通讯的安装windows操作系统的主机。<br>3、    系统内需安装Microsoft .NET Framework 4.0。</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p>1、    双击打开InCloudSphere iCenter的安装文件。<br><img src="ic1.png" alt=""></p>
+<p>2、 选择下一步。<br><img src="ic2.png" alt=""></p>
+<p>3、 勾选“所有用户”，然后选择选择下一步。<br><img src="ic3.png" alt=""></p>
+<p>4、 选择安装。<br><img src="ic4.png" alt=""></p>
+<p>5、 安装完成。<br><img src="ic5.png" alt=""></p>
+<h2 id="添加主机"><a href="#添加主机" class="headerlink" title="添加主机"></a>添加主机</h2><h3 id="添加物理机到管理平台"><a href="#添加物理机到管理平台" class="headerlink" title="添加物理机到管理平台"></a>添加物理机到管理平台</h3><p>1、 打开Inspur iCenter控制台。<br><img src="ic6.png" alt=""></p>
+<p>2、 初次登陆，控制台界面如下。<br><img src="ic7.png" alt=""></p>
+<p>3、 选择“添加服务器”。<br><img src="ic8.png" alt=""></p>
+<p>4、 输入服务器的管理IP和用户名密码。然后选择“添加”。<br><img src="ic10.png" alt=""></p>
+<p>5、 依次添加所有服务器，添加完成后界面如下。<br><img src="ic11.png" alt=""></p>
+<h3 id="打开多路径功能"><a href="#打开多路径功能" class="headerlink" title="打开多路径功能"></a>打开多路径功能</h3><p>1、 右键主机，选择“进入维护模式”。<br><img src="mpio1.png" alt=""></p>
+<p>2、 选择“进入维护模式”。<br><img src="mpio2.png" alt=""></p>
+<p>3、 右键主机，选择“属性”。<br><img src="mpio3.png" alt=""></p>
+<p>4、 选择多路径，勾选“在此服务器上启用多路径”。<br><img src="mpio4.png" alt=""></p>
+<p>5、 右键主机，选择“退出维护模式”，即完成开启主机多路径功能。<br><img src="mpio5.png" alt=""></p>
+<h2 id="配置license"><a href="#配置license" class="headerlink" title="配置license"></a>配置license</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>1、 已结提前下载好证书管理服务器LTS虚拟机的OVF文件。<br>2、 已经将物理机添加到iCenter中。<br>3、 已经获得浪潮ICS4.0的License文件。</p>
+<h3 id="导入证书管理服务器lts"><a href="#导入证书管理服务器LTS" class="headerlink" title="导入证书管理服务器LTS"></a>导入证书管理服务器LTS</h3><p>1、 在主机上右键，选择“导入”。<br><img src="lts1.png" alt=""></p>
+<p>2、 点击“浏览”。<br><img src="lts2.png" alt=""></p>
+<p>3、 选择提前已经下载好的证书管理服务器的OVF文件。<br><img src="lts3.png" alt=""></p>
+<p>4、 点击下一步。<br><img src="lts4.png" alt=""></p>
+<p>5、 点击下一步。<br><img src="lts5.png" alt=""></p>
+<p>6、 选择目标存储，然后点下一步。<br><img src="lts6.png" alt=""></p>
+<p>7、 选择下一步。<br><img src="lts7.png" alt=""></p>
+<p>8、 选择“不适用操作系统修复”，然后点击下一步。<br><img src="lts8.png" alt=""></p>
+<p>9、 设置传输虚拟机所用的网络，选择使用“网络0”，即物理机的管理口，然后配置管理地址同网段的IP地址，然后点击下一步。<br><img src="lts_IP.png" alt=""></p>
+<p>10、点击“完成”，导入证书管理服务器LTS完毕。</p>
+<h3 id="配置lts"><a href="#配置LTS" class="headerlink" title="配置LTS"></a>配置LTS</h3><p>1、 选中LTS虚拟机，打开控制台。<br><img src="lts20.png" alt=""></p>
+<p>2、 登录系统。<br><img src="lts21.png" alt=""></p>
+<p>3、 配置该虚拟机的网络，使其与管理网处于同一网段。<br><img src="lts22.png" alt=""><br><img src="lts23.png" alt=""></p>
+<p>4、 重启网络服务。<br><img src="lts24.png" alt=""></p>
+<h3 id="注册物理机"><a href="#注册物理机" class="headerlink" title="注册物理机"></a>注册物理机</h3><p>1、 打开浏览器，输入之前LTS虚拟机配置的IP地址。<br><img src="lts25.png" alt=""></p>
+<p>2、 选择“管理节点列表”，点击“添加管理节点”<br><img src="lts26.png" alt=""></p>
+<p>3、 输入物理机的IP地址、用户名和密码。然后点击“保存”。<br><img src="lts27.png" alt=""></p>
+<p>4、 依上述步骤，依次添加所有物理机。</p>
+<p>5、 选中“License列表”，选择“上传License”。<br><img src="lts28.png" alt=""></p>
+<p>6、 选择“choose file”。<br><img src="lts29.png" alt=""></p>
+<p>7、 添加好License文件，然后点击上传。<br><img src="lts30.png" alt=""></p>
+<p>8、 选中“主机列表”，在未授权的主机上右键，然后选择“全部授权”。<br><img src="lts34.png" alt=""><br><img src="lts35.png" alt=""></p>
+<p>9、 依次将所有主机授权。</p>
+<p>10、 选中“主机列表”，点击“同步主机”。<br><img src="lts36.png" alt=""></p>
+<p>11、 点击ok。<br><img src="lts37.png" alt=""><br><img src="lts38.png" alt=""></p>
+<p>12、 主机信息同步成功，注册完成。<br><img src="lts39.png" alt=""></p>
+<h2 id="创建资源池"><a href="#创建资源池" class="headerlink" title="创建资源池"></a>创建资源池</h2><h3 id="创建主机池"><a href="#创建主机池" class="headerlink" title="创建主机池"></a>创建主机池</h3><p>1、 点击“新建池”。<br><img src="newpool1.png" alt=""></p>
+<p>2、 输入资源池的名称；在“主服务器”一栏选择资源池的主服务器；在“其他成员”一栏选择资源池的成员。<br><img src="newpool2.png" alt=""></p>
+<p>3、 点击“创建”创建资源池。<br><img src="newpool3.png" alt=""></p>
+<p>4、 在资源池创建完成之后，也可以在主机上右键，将主机添加到资源池。</p>
+<h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><h3 id="ics40网络介绍"><a href="#ICS4-0网络介绍" class="headerlink" title="ICS4.0网络介绍"></a>ICS4.0网络介绍</h3><p>ICS有三种网络类型：管理网络，存储网络，虚拟机网络。</p>
+<ol>
+<li>管理网络：虚拟机默认的网络，用于内部管理，默认未开启motion功能。</li>
+<li>存储网络：是ICS实现连接iscsi存储、HA功能的基础网络类型，要实现以上功能先创建此网络类型。</li>
+<li>虚拟机网络：虚拟机对外通信的网络，如果要为生产虚拟机提供网络连接，则必须要创建该类型的tagged组。</li>
+</ol>
+<h3 id="管理网络"><a href="#管理网络" class="headerlink" title="管理网络"></a>管理网络</h3><p>1、默认安装配置时的IP网络为管理网络。<br><img src="net1.png" alt=""></p>
+<p>2、在虚拟机的“网络管理”里也可以看到管理网的IP地址。<br><img src="net2.png" alt=""></p>
+<h3 id="虚拟机网络设置"><a href="#虚拟机网络设置" class="headerlink" title="虚拟机网络设置"></a>虚拟机网络设置</h3><p>注：虚拟机网络与管理网都是通过网口0与外部进行通讯，VLAN号设置为1095，交换机上也做相应的VLAN配置。</p>
+<p>1、选中需要配置的资源池，然后点击“添加网络”。<br><img src="net3.png" alt=""><br>　　<br>2、勾选“外部网络”，然后点击下一步。<br><img src="net4.png" alt=""></p>
+<p>4、 输入网络的名称，然后点击“下一步”。<br><img src="net5.png" alt=""></p>
+<p>5、 选择将该虚拟网络映射到物理网卡NIC0，即网口0，VLAN号设置为1095，然后点击“完成”。<br><img src="net6.png" alt=""></p>
+<p>6、 虚拟机网络设置完毕。<br><img src="net7.png" alt=""></p>
+<h3 id="ics40存储网络设置"><a href="#ICS4-0存储网络设置" class="headerlink" title="ICS4.0存储网络设置"></a>ICS4.0存储网络设置</h3><p>注：<em>在虚拟化环境中，只有IP SAN和NAS需要存储网络设置，如果是FC-SAN则不需要设置存储网络。</em><br>1、选中资源池，然后点击“添加网络”。<br><img src="net8.png" alt=""></p>
+<p>2、勾选“绑定网络”，然后点击“下一步”。<br><img src="net9.png" alt=""></p>
+<p>4、 选中NIC2和NIC3，将绑定模式勾选为“主动-主动”，然后点击完成。<br><img src="net10.png" alt=""></p>
+<p>5、 选中“绑定2+3”网络，点击“配置”。<br><img src="net11.png" alt=""></p>
+<p>6、 点击“添加IP地址”。<br><img src="net12.png" alt=""><br>　　<br>7、 输入存储的IP地址，然后点击确定。<br><img src="net13.png" alt=""></p>
+<p>　　</p>
+<h2 id="添加存储"><a href="#添加存储" class="headerlink" title="添加存储"></a>添加存储</h2><p>1、在资源池上右键，选择“新建SR”。<br><img src="str1.png" alt=""></p>
+<p>2、勾选“软件iSCI”，然后下一步。<br><img src="str2.png" alt=""></p>
+<p>3、输入存储名称，点击“下一步”。<br><img src="str3.png" alt=""></p>
+<p>4、 输入存储的IP地址，然后点击“扫描主机”。<br><img src="str4.png" alt=""></p>
+<p>5、选择目标IQN<br><img src="str5.png" alt=""></p>
+<p>6、 选择目标LUN，然后点击完成。<br><img src="str6.png" alt=""><br><img src="str7.png" alt=""></p>
+<p>7、按照以上步骤，依次添加所有存储。</p>
+<h2 id="虚拟机部署"><a href="#虚拟机部署" class="headerlink" title="虚拟机部署"></a>虚拟机部署</h2><h3 id="创建cifs库"><a href="#创建CIFS库" class="headerlink" title="创建CIFS库"></a>创建CIFS库</h3><p>1、设置文件夹共享。<br><img src="cifs1.png" alt=""><br><img src="cifs2.png" alt="">    </p>
+<p>2、在资源池上右键，选择“新建SR”。<br><img src="cifs3.png" alt="">    </p>
+<p>3、勾选“Windows文件共享”，点击下一步。<br><img src="cifs4.png" alt="">    </p>
+<p>4、 输入名称，点击下一步。<br><img src="cifs5.png" alt="">    </p>
+<p>5、 输入之前共享的文件夹的路径，点击完成。<br><img src="cifs6.png" alt="">    </p>
+<p>6、 CIFS库添加完毕。<br><img src="cifs7.png" alt="">    </p>
+<h3 id="新建虚拟机"><a href="#新建虚拟机" class="headerlink" title="新建虚拟机"></a>新建虚拟机</h3><p>1、选中资源池，然后点击新建VM。<br><img src="newvm1.png" alt=""></p>
+<p>2、选择相应的VM模板，然后点击下一步。<br><img src="newvm2.png" alt=""></p>
+<p>3、输入虚拟机的名称，点击下一步。<br><img src="newvm3.png" alt=""></p>
+<p>4、 选择安装介质，从之前添加的CIFS库中选择对应的ISO文件。<br><img src="newvm4.png" alt=""><br><img src="newvm5.png" alt=""></p>
+<p>5、 选择该虚机的主服务器。<br><img src="newvm6.png" alt=""></p>
+<p>6、 配置CPU数量和内存大小。<br><img src="newvm8.png" alt=""><br><img src="newvm9.png" alt=""></p>
+<p>8、 物理机未配备GPU，直接下一步。<br><img src="newvm10.png" alt=""></p>
+<p>9、 点击“属性”，配置虚机的磁盘。<br><img src="newvm12.png" alt=""></p>
+<p>10、 配置磁盘的名称、大小和所在位置，然后点击确定。<br><img src="newvm13.png" alt=""></p>
+<p>11、 配置磁盘完毕，点击下一步。<br><img src="newvm14.png" alt=""></p>
+<p>12、 配置虚机的网络，将多余的网络删除，然后点击下一步。<br><img src="newvm15.png" alt=""><br><img src="newvm16.png" alt=""></p>
+<p>13、 点击“立即创建”。<br><img src="newvm17.png" alt=""></p>
+<p>14、 虚拟机创建完毕。<br><img src="newvm18.png" alt=""></p>
+<p>　　</p>
+<h3 id="安装操作系统"><a href="#安装操作系统" class="headerlink" title="安装操作系统"></a>安装操作系统</h3><p>1、选择虚拟机，打开控制台，然后选择“取消停靠”。<br><img src="newvm19.png" alt="">    </p>
+<p>2、选择安装语音、时间货币格式和键盘格式，点击下一步。<br><img src="newvm20.png" alt="">    </p>
+<p>3、选择“现在安装”<br><img src="newvm21.png" alt="">    </p>
+<p>4、 选择操作系统的版本，点击下一步继续。<br><img src="newvm22.png" alt="">    </p>
+<p>5、 勾选“我接受许可条款”，点击下一步继续。<br><img src="newvm23.png" alt="">    </p>
+<p>6、 选择自定义安装。<br><img src="newvm24.png" alt="">    </p>
+<p>7、 选择要安装的磁盘，点击下一步继续。<br><img src="newvm25.png" alt="">    </p>
+<p>8、安装完成。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/虚拟化/">虚拟化</a><a href="/tags/XenServer/">XenServer</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhiqiang.space/2016/08/11/某项目XenServer虚拟化实施过程/" data-title="某项目XenServer虚拟化实施过程 | zqwang&#39;blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/08/23/Redhat下查看HBA卡的WWN号/" title="Redhat下查看HBA卡的WWN号">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Redhat下查看HBA卡的WWN号</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/08/05/什么是Raid2-0/"  title="什么是Raid2.0">
+ <strong>NEXT:</strong><br/> 
+ <span>什么是Raid2.0
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目背景介绍"><span class="toc-number">1.</span> <span class="toc-text">项目背景介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实施过程"><span class="toc-number">2.</span> <span class="toc-text">实施过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装物理机系统"><span class="toc-number">2.1.</span> <span class="toc-text">安装物理机系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装icenterics40管理客户端"><span class="toc-number">2.2.</span> <span class="toc-text">安装iCenter(ICS4.0管理客户端)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提条件"><span class="toc-number">2.2.1.</span> <span class="toc-text">前提条件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装过程"><span class="toc-number">2.2.2.</span> <span class="toc-text">安装过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加主机"><span class="toc-number">2.3.</span> <span class="toc-text">添加主机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加物理机到管理平台"><span class="toc-number">2.3.1.</span> <span class="toc-text">添加物理机到管理平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开多路径功能"><span class="toc-number">2.3.2.</span> <span class="toc-text">打开多路径功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置license"><span class="toc-number">2.4.</span> <span class="toc-text">配置license</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-number">2.4.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入证书管理服务器lts"><span class="toc-number">2.4.2.</span> <span class="toc-text">导入证书管理服务器LTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置lts"><span class="toc-number">2.4.3.</span> <span class="toc-text">配置LTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册物理机"><span class="toc-number">2.4.4.</span> <span class="toc-text">注册物理机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建资源池"><span class="toc-number">2.5.</span> <span class="toc-text">创建资源池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建主机池"><span class="toc-number">2.5.1.</span> <span class="toc-text">创建主机池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络设置"><span class="toc-number">2.6.</span> <span class="toc-text">网络设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ics40网络介绍"><span class="toc-number">2.6.1.</span> <span class="toc-text">ICS4.0网络介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管理网络"><span class="toc-number">2.6.2.</span> <span class="toc-text">管理网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟机网络设置"><span class="toc-number">2.6.3.</span> <span class="toc-text">虚拟机网络设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ics40存储网络设置"><span class="toc-number">2.6.4.</span> <span class="toc-text">ICS4.0存储网络设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加存储"><span class="toc-number">2.7.</span> <span class="toc-text">添加存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟机部署"><span class="toc-number">2.8.</span> <span class="toc-text">虚拟机部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建cifs库"><span class="toc-number">2.8.1.</span> <span class="toc-text">创建CIFS库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建虚拟机"><span class="toc-number">2.8.2.</span> <span class="toc-text">新建虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装操作系统"><span class="toc-number">2.8.3.</span> <span class="toc-text">安装操作系统</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CPU/" title="CPU">CPU<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MySQL/" title="MySQL">MySQL<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>0</sup></a></li>
+		
+			<li><a href="/tags/Raid/" title="Raid">Raid<sup>1</sup></a></li>
+		
+			<li><a href="/tags/SS/" title="SS">SS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/VMware/" title="VMware">VMware<sup>2</sup></a></li>
+		
+			<li><a href="/tags/XenServer/" title="XenServer">XenServer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/windows/" title="windows">windows<sup>1</sup></a></li>
+		
+			<li><a href="/tags/交换机/" title="交换机">交换机<sup>1</sup></a></li>
+		
+			<li><a href="/tags/学习笔记/" title="学习笔记">学习笔记<sup>3</sup></a></li>
+		
+			<li><a href="/tags/服务器/" title="服务器">服务器<sup>1</sup></a></li>
+		
+			<li><a href="/tags/端口/" title="端口">端口<sup>1</sup></a></li>
+		
+			<li><a href="/tags/翻墙/" title="翻墙">翻墙<sup>1</sup></a></li>
+		
+			<li><a href="/tags/虚拟化/" title="虚拟化">虚拟化<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="http://zhiqiang.space/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m zqwang. <br/>
+			This is my blog.</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		
+		<a href="https://twitter.com/zqwang0929" target="_blank" title="twitter"></a>
+		
+		
+		
+		
+        <a href="https://www.linkedin.com//pub/志强-王/100/201/b12" target="_blank" title="linkedin"></a>
+        
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://zhiqiang.space" target="_blank" title="wang zhiqiang">wang zhiqiang</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zqwang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

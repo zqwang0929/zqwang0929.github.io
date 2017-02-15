@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>http://zhiqiang.space/2017/02/16/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="quick-start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Xeon系列CPU简略介绍]]></title>
+      <url>http://zhiqiang.space/2016/08/25/Xeon%E7%B3%BB%E5%88%97CPU%E7%AE%80%E7%95%A5%E4%BB%8B%E7%BB%8D/</url>
+      <content type="html"><![CDATA[<p>Xeon系列的CPU是Intel主要面向服务器领域的。</p>
+<p>分为<code>E3、E5、E7</code>三个级别，类似于宝马的3系，5系和7系。数字越大，性能越好，价格也越高。</p>
+<p><strong>举个例子</strong>：<br><img src="cpu1.png" alt=""></p>
+<p><code>E7-4809V3</code>，横线后的第一个数字代表的是最大的物理CPU的数量，分为<code>单路，两路，四路，八路。</code></p>
+<p>第二个数字代表<code>CPU封装的类型</code>，即CPU的插座类型，，一共有2，4，6，8四种规格，分别是2对应Socket H2(LGA 1155)、4对应Socket B2(LGA 1356)、6对应Socket R(LGA 2011)、8对应Socket LS(LGA 1567)。</p>
+<p>第三和第四位代表<code>编号序列</code>，一般是数字越大产品性能越高，价格也更贵。</p>
+<p>最后的数字代表<code>修订版本</code>，比如v2、v3、v4。</p>
+<p>E7-4809V3单个CPU的内核数量是8核，假如一个四路服务器配备了四个CPU，也就是说该服务器有32核心，有64个线程。</p>
+<p>如果是E7-8890的话：<br><img src="cpu2.png" alt=""><br>则是有8个CPU，每个CPU有18核，共有144个核心，288个线程。<br><a id="more"></a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 服务器 </tag>
+            
+            <tag> CPU </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Redhat下查看HBA卡的WWN号]]></title>
+      <url>http://zhiqiang.space/2016/08/23/Redhat%E4%B8%8B%E6%9F%A5%E7%9C%8BHBA%E5%8D%A1%E7%9A%84WWN%E5%8F%B7/</url>
+      <content type="html"><![CDATA[<figure class="highlight gradle"><table><tr><td class="code"><pre><div class="line"># cat <span class="regexp">/sys/</span><span class="keyword">class</span><span class="regexp">/fc_host/</span>hostx<span class="regexp">/port_name</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[某项目XenServer虚拟化实施过程]]></title>
+      <url>http://zhiqiang.space/2016/08/11/%E6%9F%90%E9%A1%B9%E7%9B%AEXenServer%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%9E%E6%96%BD%E8%BF%87%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<h1 id="项目背景介绍"><a href="#项目背景介绍" class="headerlink" title="项目背景介绍"></a>项目背景介绍</h1><p>该项目共有60台物理机，物理机配置为2颗XEON6核E5-2630，内存64GDDR3，4块600G硬盘SAS做Raid5，每台物理机有四个网口，由于现场网络环境和项目前期规划的限制，其中eth0做管理网，eth2和eth3做存储网；存储华为S5600T存储。虚拟化软件为浪潮的InCloudSphere4.0(ICS4.0)</p>
+<a id="more"></a>
+<h1 id="实施过程"><a href="#实施过程" class="headerlink" title="实施过程"></a>实施过程</h1><h2 id="安装物理机系统"><a href="#安装物理机系统" class="headerlink" title="安装物理机系统"></a>安装物理机系统</h2><p>1、 使用ICS4.0 的安装光盘引导服务器启动。</p>
+<p>2、 按F2选择高级模式安装系统。<br>注：<em>1，安装前检查厂商提供的ICS硬件兼容列表，检查硬件的兼容性，部分硬件厂商需要使用硬件厂商的引导光盘安装操作系统。</em><br><em>2，ICS分别有两种安装模式，一种是标准模式，一种是高级模式，标准模式采用默认配置安装，高级模式可进入shell模式进行一些高级配置，如dom0内存和空间大小的配置等.</em><br><img src="F2.png" alt=""><br>3、 输入shell，回车。<br><img src="shell.png" alt=""><br><img src="shell2.png" alt=""><br>4、 编辑安装引导文件constans.py<br><img src="vi1.png" alt=""></p>
+<p>5、将GPT_SUPPORT=True改为False（禁用GPT分区，使用MBR分区表），将root_size=4096改成40960（即40G大小）。<br>注：root_size，Domain0的root卷大小，使用较大的 root 卷大小可以有效防止由于Dom0 日志的突然快速增长导致 root 卷空间被占满从而引起 Dom0 运行异常的情况发生。<br><img src="vi2.png" alt=""></p>
+<p>6、 保存后，输入exit退出shell模式。<br><img src="exit.png" alt=""></p>
+<p>7、 键盘选择“us”并“OK”继续<br><img src="keymap.png" alt=""><br>8、操作系统安装欢迎界面，选择“OK”继续安装。<br><img src="sp160810_151849.png" alt=""><br>9、 最终用户许可协议，选择“Accept EULA”继续安装。<br><img src="EULA.png" alt=""></p>
+<p>10、 选择操作系统要安装的存储，默认选择本地服务器的磁盘阵列。<br>注：1，本地磁盘预先做好RAID。 2，thin provisioning功能需配合桌面虚拟化功能，如只是服务器虚拟化可不用开启。<br><img src="virtualstor.png" alt=""></p>
+<p>11、 选择“Local media”并继续安装。<br><img src="source.png" alt=""></p>
+<p>12、选择不安装系统的补丁包。<br><img src="packs.png" alt=""></p>
+<p>13、 选择不验证安装介质。<br><img src="verify.png" alt=""></p>
+<p>14、 设置密码。<br><img src="passwd.png" alt=""></p>
+<p>15、 选择服务器管理网络的网口。<br> 注：项目定义的eth2和eth3为存储数据网，eth0做为管理网和业务网。<br><img src="networking.png" alt=""></p>
+<p>16、 输入管理网的IP地址。<br><img src="networking2.png" alt=""></p>
+<p>17、按命名规则输入HostName（参考附录“服务器命名规范”），并输入DNS。<br><img src="hostname.png" alt=""></p>
+<p>18、 选择时区。<br><img src="timezone.png" alt=""><br><img src="timezone2.png" alt=""></p>
+<p>19、 设置NTP服务地址<br>注：<em>因ICS4.0旗舰版对时间的要求非常高，所以建议给每台服务器配置NTP，如果实在没有，手动将服务器BIOS及系统的时间修改为一致（BIOS时间比系统时间慢8小时）</em><br><img src="ntp01.png" alt=""><br><img src="ntp02.png" alt=""></p>
+<p>20、 选择安装系统。<br><img src="install.png" alt=""><br><img src="install2.png" alt=""></p>
+<p>21、 安装完毕，重启机器。</p>
+<h2 id="安装icenterics40管理客户端"><a href="#安装iCenter-ICS4-0管理客户端" class="headerlink" title="安装iCenter(ICS4.0管理客户端)"></a>安装iCenter(ICS4.0管理客户端)</h2><h3 id="前提条件"><a href="#前提条件：" class="headerlink" title="前提条件："></a>前提条件：</h3><p>1、    准备好iCenter的安装文件。<br>2、    一台与管理网IP地址通讯的安装windows操作系统的主机。<br>3、    系统内需安装Microsoft .NET Framework 4.0。</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p>1、    双击打开InCloudSphere iCenter的安装文件。<br><img src="ic1.png" alt=""></p>
+<p>2、 选择下一步。<br><img src="ic2.png" alt=""></p>
+<p>3、 勾选“所有用户”，然后选择选择下一步。<br><img src="ic3.png" alt=""></p>
+<p>4、 选择安装。<br><img src="ic4.png" alt=""></p>
+<p>5、 安装完成。<br><img src="ic5.png" alt=""></p>
+<h2 id="添加主机"><a href="#添加主机" class="headerlink" title="添加主机"></a>添加主机</h2><h3 id="添加物理机到管理平台"><a href="#添加物理机到管理平台" class="headerlink" title="添加物理机到管理平台"></a>添加物理机到管理平台</h3><p>1、 打开Inspur iCenter控制台。<br><img src="ic6.png" alt=""></p>
+<p>2、 初次登陆，控制台界面如下。<br><img src="ic7.png" alt=""></p>
+<p>3、 选择“添加服务器”。<br><img src="ic8.png" alt=""></p>
+<p>4、 输入服务器的管理IP和用户名密码。然后选择“添加”。<br><img src="ic10.png" alt=""></p>
+<p>5、 依次添加所有服务器，添加完成后界面如下。<br><img src="ic11.png" alt=""></p>
+<h3 id="打开多路径功能"><a href="#打开多路径功能" class="headerlink" title="打开多路径功能"></a>打开多路径功能</h3><p>1、 右键主机，选择“进入维护模式”。<br><img src="mpio1.png" alt=""></p>
+<p>2、 选择“进入维护模式”。<br><img src="mpio2.png" alt=""></p>
+<p>3、 右键主机，选择“属性”。<br><img src="mpio3.png" alt=""></p>
+<p>4、 选择多路径，勾选“在此服务器上启用多路径”。<br><img src="mpio4.png" alt=""></p>
+<p>5、 右键主机，选择“退出维护模式”，即完成开启主机多路径功能。<br><img src="mpio5.png" alt=""></p>
+<h2 id="配置license"><a href="#配置license" class="headerlink" title="配置license"></a>配置license</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>1、 已结提前下载好证书管理服务器LTS虚拟机的OVF文件。<br>2、 已经将物理机添加到iCenter中。<br>3、 已经获得浪潮ICS4.0的License文件。</p>
+<h3 id="导入证书管理服务器lts"><a href="#导入证书管理服务器LTS" class="headerlink" title="导入证书管理服务器LTS"></a>导入证书管理服务器LTS</h3><p>1、 在主机上右键，选择“导入”。<br><img src="lts1.png" alt=""></p>
+<p>2、 点击“浏览”。<br><img src="lts2.png" alt=""></p>
+<p>3、 选择提前已经下载好的证书管理服务器的OVF文件。<br><img src="lts3.png" alt=""></p>
+<p>4、 点击下一步。<br><img src="lts4.png" alt=""></p>
+<p>5、 点击下一步。<br><img src="lts5.png" alt=""></p>
+<p>6、 选择目标存储，然后点下一步。<br><img src="lts6.png" alt=""></p>
+<p>7、 选择下一步。<br><img src="lts7.png" alt=""></p>
+<p>8、 选择“不适用操作系统修复”，然后点击下一步。<br><img src="lts8.png" alt=""></p>
+<p>9、 设置传输虚拟机所用的网络，选择使用“网络0”，即物理机的管理口，然后配置管理地址同网段的IP地址，然后点击下一步。<br><img src="lts_IP.png" alt=""></p>
+<p>10、点击“完成”，导入证书管理服务器LTS完毕。</p>
+<h3 id="配置lts"><a href="#配置LTS" class="headerlink" title="配置LTS"></a>配置LTS</h3><p>1、 选中LTS虚拟机，打开控制台。<br><img src="lts20.png" alt=""></p>
+<p>2、 登录系统。<br><img src="lts21.png" alt=""></p>
+<p>3、 配置该虚拟机的网络，使其与管理网处于同一网段。<br><img src="lts22.png" alt=""><br><img src="lts23.png" alt=""></p>
+<p>4、 重启网络服务。<br><img src="lts24.png" alt=""></p>
+<h3 id="注册物理机"><a href="#注册物理机" class="headerlink" title="注册物理机"></a>注册物理机</h3><p>1、 打开浏览器，输入之前LTS虚拟机配置的IP地址。<br><img src="lts25.png" alt=""></p>
+<p>2、 选择“管理节点列表”，点击“添加管理节点”<br><img src="lts26.png" alt=""></p>
+<p>3、 输入物理机的IP地址、用户名和密码。然后点击“保存”。<br><img src="lts27.png" alt=""></p>
+<p>4、 依上述步骤，依次添加所有物理机。</p>
+<p>5、 选中“License列表”，选择“上传License”。<br><img src="lts28.png" alt=""></p>
+<p>6、 选择“choose file”。<br><img src="lts29.png" alt=""></p>
+<p>7、 添加好License文件，然后点击上传。<br><img src="lts30.png" alt=""></p>
+<p>8、 选中“主机列表”，在未授权的主机上右键，然后选择“全部授权”。<br><img src="lts34.png" alt=""><br><img src="lts35.png" alt=""></p>
+<p>9、 依次将所有主机授权。</p>
+<p>10、 选中“主机列表”，点击“同步主机”。<br><img src="lts36.png" alt=""></p>
+<p>11、 点击ok。<br><img src="lts37.png" alt=""><br><img src="lts38.png" alt=""></p>
+<p>12、 主机信息同步成功，注册完成。<br><img src="lts39.png" alt=""></p>
+<h2 id="创建资源池"><a href="#创建资源池" class="headerlink" title="创建资源池"></a>创建资源池</h2><h3 id="创建主机池"><a href="#创建主机池" class="headerlink" title="创建主机池"></a>创建主机池</h3><p>1、 点击“新建池”。<br><img src="newpool1.png" alt=""></p>
+<p>2、 输入资源池的名称；在“主服务器”一栏选择资源池的主服务器；在“其他成员”一栏选择资源池的成员。<br><img src="newpool2.png" alt=""></p>
+<p>3、 点击“创建”创建资源池。<br><img src="newpool3.png" alt=""></p>
+<p>4、 在资源池创建完成之后，也可以在主机上右键，将主机添加到资源池。</p>
+<h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><h3 id="ics40网络介绍"><a href="#ICS4-0网络介绍" class="headerlink" title="ICS4.0网络介绍"></a>ICS4.0网络介绍</h3><p>ICS有三种网络类型：管理网络，存储网络，虚拟机网络。</p>
+<ol>
+<li>管理网络：虚拟机默认的网络，用于内部管理，默认未开启motion功能。</li>
+<li>存储网络：是ICS实现连接iscsi存储、HA功能的基础网络类型，要实现以上功能先创建此网络类型。</li>
+<li>虚拟机网络：虚拟机对外通信的网络，如果要为生产虚拟机提供网络连接，则必须要创建该类型的tagged组。</li>
+</ol>
+<h3 id="管理网络"><a href="#管理网络" class="headerlink" title="管理网络"></a>管理网络</h3><p>1、默认安装配置时的IP网络为管理网络。<br><img src="net1.png" alt=""></p>
+<p>2、在虚拟机的“网络管理”里也可以看到管理网的IP地址。<br><img src="net2.png" alt=""></p>
+<h3 id="虚拟机网络设置"><a href="#虚拟机网络设置" class="headerlink" title="虚拟机网络设置"></a>虚拟机网络设置</h3><p>注：虚拟机网络与管理网都是通过网口0与外部进行通讯，VLAN号设置为1095，交换机上也做相应的VLAN配置。</p>
+<p>1、选中需要配置的资源池，然后点击“添加网络”。<br><img src="net3.png" alt=""><br>　　<br>2、勾选“外部网络”，然后点击下一步。<br><img src="net4.png" alt=""></p>
+<p>4、 输入网络的名称，然后点击“下一步”。<br><img src="net5.png" alt=""></p>
+<p>5、 选择将该虚拟网络映射到物理网卡NIC0，即网口0，VLAN号设置为1095，然后点击“完成”。<br><img src="net6.png" alt=""></p>
+<p>6、 虚拟机网络设置完毕。<br><img src="net7.png" alt=""></p>
+<h3 id="ics40存储网络设置"><a href="#ICS4-0存储网络设置" class="headerlink" title="ICS4.0存储网络设置"></a>ICS4.0存储网络设置</h3><p>注：<em>在虚拟化环境中，只有IP SAN和NAS需要存储网络设置，如果是FC-SAN则不需要设置存储网络。</em><br>1、选中资源池，然后点击“添加网络”。<br><img src="net8.png" alt=""></p>
+<p>2、勾选“绑定网络”，然后点击“下一步”。<br><img src="net9.png" alt=""></p>
+<p>4、 选中NIC2和NIC3，将绑定模式勾选为“主动-主动”，然后点击完成。<br><img src="net10.png" alt=""></p>
+<p>5、 选中“绑定2+3”网络，点击“配置”。<br><img src="net11.png" alt=""></p>
+<p>6、 点击“添加IP地址”。<br><img src="net12.png" alt=""><br>　　<br>7、 输入存储的IP地址，然后点击确定。<br><img src="net13.png" alt=""></p>
+<p>　　</p>
+<h2 id="添加存储"><a href="#添加存储" class="headerlink" title="添加存储"></a>添加存储</h2><p>1、在资源池上右键，选择“新建SR”。<br><img src="str1.png" alt=""></p>
+<p>2、勾选“软件iSCI”，然后下一步。<br><img src="str2.png" alt=""></p>
+<p>3、输入存储名称，点击“下一步”。<br><img src="str3.png" alt=""></p>
+<p>4、 输入存储的IP地址，然后点击“扫描主机”。<br><img src="str4.png" alt=""></p>
+<p>5、选择目标IQN<br><img src="str5.png" alt=""></p>
+<p>6、 选择目标LUN，然后点击完成。<br><img src="str6.png" alt=""><br><img src="str7.png" alt=""></p>
+<p>7、按照以上步骤，依次添加所有存储。</p>
+<h2 id="虚拟机部署"><a href="#虚拟机部署" class="headerlink" title="虚拟机部署"></a>虚拟机部署</h2><h3 id="创建cifs库"><a href="#创建CIFS库" class="headerlink" title="创建CIFS库"></a>创建CIFS库</h3><p>1、设置文件夹共享。<br><img src="cifs1.png" alt=""><br><img src="cifs2.png" alt="">    </p>
+<p>2、在资源池上右键，选择“新建SR”。<br><img src="cifs3.png" alt="">    </p>
+<p>3、勾选“Windows文件共享”，点击下一步。<br><img src="cifs4.png" alt="">    </p>
+<p>4、 输入名称，点击下一步。<br><img src="cifs5.png" alt="">    </p>
+<p>5、 输入之前共享的文件夹的路径，点击完成。<br><img src="cifs6.png" alt="">    </p>
+<p>6、 CIFS库添加完毕。<br><img src="cifs7.png" alt="">    </p>
+<h3 id="新建虚拟机"><a href="#新建虚拟机" class="headerlink" title="新建虚拟机"></a>新建虚拟机</h3><p>1、选中资源池，然后点击新建VM。<br><img src="newvm1.png" alt=""></p>
+<p>2、选择相应的VM模板，然后点击下一步。<br><img src="newvm2.png" alt=""></p>
+<p>3、输入虚拟机的名称，点击下一步。<br><img src="newvm3.png" alt=""></p>
+<p>4、 选择安装介质，从之前添加的CIFS库中选择对应的ISO文件。<br><img src="newvm4.png" alt=""><br><img src="newvm5.png" alt=""></p>
+<p>5、 选择该虚机的主服务器。<br><img src="newvm6.png" alt=""></p>
+<p>6、 配置CPU数量和内存大小。<br><img src="newvm8.png" alt=""><br><img src="newvm9.png" alt=""></p>
+<p>8、 物理机未配备GPU，直接下一步。<br><img src="newvm10.png" alt=""></p>
+<p>9、 点击“属性”，配置虚机的磁盘。<br><img src="newvm12.png" alt=""></p>
+<p>10、 配置磁盘的名称、大小和所在位置，然后点击确定。<br><img src="newvm13.png" alt=""></p>
+<p>11、 配置磁盘完毕，点击下一步。<br><img src="newvm14.png" alt=""></p>
+<p>12、 配置虚机的网络，将多余的网络删除，然后点击下一步。<br><img src="newvm15.png" alt=""><br><img src="newvm16.png" alt=""></p>
+<p>13、 点击“立即创建”。<br><img src="newvm17.png" alt=""></p>
+<p>14、 虚拟机创建完毕。<br><img src="newvm18.png" alt=""></p>
+<p>　　</p>
+<h3 id="安装操作系统"><a href="#安装操作系统" class="headerlink" title="安装操作系统"></a>安装操作系统</h3><p>1、选择虚拟机，打开控制台，然后选择“取消停靠”。<br><img src="newvm19.png" alt="">    </p>
+<p>2、选择安装语音、时间货币格式和键盘格式，点击下一步。<br><img src="newvm20.png" alt="">    </p>
+<p>3、选择“现在安装”<br><img src="newvm21.png" alt="">    </p>
+<p>4、 选择操作系统的版本，点击下一步继续。<br><img src="newvm22.png" alt="">    </p>
+<p>5、 勾选“我接受许可条款”，点击下一步继续。<br><img src="newvm23.png" alt="">    </p>
+<p>6、 选择自定义安装。<br><img src="newvm24.png" alt="">    </p>
+<p>7、 选择要安装的磁盘，点击下一步继续。<br><img src="newvm25.png" alt="">    </p>
+<p>8、安装完成。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 虚拟化 </tag>
+            
+            <tag> XenServer </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[什么是Raid2.0]]></title>
+      <url>http://zhiqiang.space/2016/08/05/%E4%BB%80%E4%B9%88%E6%98%AFRaid2-0/</url>
+      <content type="html"><![CDATA[<h1 id="raid10"><a href="#Raid1-0" class="headerlink" title="Raid1.0"></a>Raid1.0</h1><h2 id="原理"><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><p>选几个硬盘——&gt;做Raid5——&gt;根据容量需要划LUN——&gt;映射给主机</p>
+<h2 id="缺点"><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h2><p>1.重建时间太长，在硬盘容量小的时候，不存在该问题，但是随着技术不断发展，硬盘硬盘越做越大，重建时间越来越长，在重建过程中，极有可能再次发生硬盘掉线，导致数据丢失。</p>
+<p>2.性能问题，一个LUN的读写只能在一个磁盘组进行，让后面加入的SSD等新的介质发挥不了作用。</p>
+<hr>
+<a id="more"></a>
+<h1 id="raid15"><a href="#Raid1-5" class="headerlink" title="Raid1.5"></a>Raid1.5</h1><h2 id="原理"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h2><p>选几个硬盘——&gt;做成Raid5——&gt;选多个Raid组成一个池——&gt;划分成大小相等的Extend——&gt;选择Extend组成LUN——&gt;映射给主机</p>
+<h2 id="优点"><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><p>解决了性能的问题，因为一个LUN的读写同时跨越了很多的硬盘，而且这个LUN里面可以包含多个RAID组，也就可以有多种磁盘介质，可以做到自动分层存储。</p>
+<h2 id="缺点"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h2><p>由于Raid组还是基于硬盘的，这块硬盘坏了，只有一个Raid组的几个硬盘参与重构，因此重构速度依然和Raid1.0一样。</p>
+<hr>
+<h1 id="raid20"><a href="#Raid2-0" class="headerlink" title="Raid2.0"></a>Raid2.0</h1><h2 id="原理"><a href="#原理：-2" class="headerlink" title="原理："></a>原理：</h2><p>选所有个硬盘——&gt;全部切成做大块Chuck——&gt;以Chuck为单位做成Raid(CKG)——&gt;把CKG切分为相等的小块Extend——&gt;选择Extend组成LUN——&gt;映射给主机</p>
+<h2 id="优点"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h2><p>Raid2.0做Raid的基础是Chuck而不是硬盘，因此当一个硬盘故障的时候，就相当于在这个硬盘里的所有Chuck都故障了，跟这些Chuck相关的Raid即CKG都得开始重建，重建时又会随机选择其他硬盘里的Chuck，同样的任务，干活的多了，重建速度自然就快了。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Raid </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[如何在Windows中查询端口号被哪个程序占用]]></title>
+      <url>http://zhiqiang.space/2016/08/04/%E5%A6%82%E4%BD%95%E5%9C%A8Windows%E4%B8%AD%E6%9F%A5%E8%AF%A2%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%A2%AB%E5%93%AA%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%8D%A0%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>点击<code>开始</code>输入<code>cmd</code>，运行以下命令：</p>
+<ol>
+<li><p>查询各个端口占用情况：<code>netstat -a -n</code></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">C</span>:\<span class="selector-tag">Users</span>\<span class="selector-tag">zqwang</span>&gt;<span class="selector-tag">netstat</span> <span class="selector-tag">-a</span> <span class="selector-tag">-n</span></div><div class="line"></div><div class="line">活动连接</div><div class="line"></div><div class="line">  协议   本地地址               外部地址               状态</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:135</span>            0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:445</span>            0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1025</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1026</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1027</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1028</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1029</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1080</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1688</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:8123</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1059</span>         0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span></div><div class="line">  <span class="selector-tag">TCP</span>    127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1080</span>         127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1760</span>         <span class="selector-tag">ESTABLISHED</span></div><div class="line">  <span class="selector-tag">TCP</span>    127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1080</span>         127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1762</span>         <span class="selector-tag">ESTABLISHED</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>查看各个端口占用和占用的进程的PID：<code>netstat -ano</code></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">C</span>:\<span class="selector-tag">Users</span>\<span class="selector-tag">zqwang</span>&gt;<span class="selector-tag">netstat</span> <span class="selector-tag">-ano</span></div><div class="line"></div><div class="line">活动连接</div><div class="line"></div><div class="line">  协议   本地地址               外部地址               状态           <span class="selector-tag">PID</span></div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:135</span>            0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       868</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:445</span>            0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       4</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1025</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       564</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1026</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       964</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1027</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       468</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1028</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       680</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1029</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       664</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1080</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       4932</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:1688</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       1908</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:3000</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       5788</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:3001</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       5788</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:4000</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       5788</div><div class="line">  <span class="selector-tag">TCP</span>    0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:8123</span>           0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       1712</div><div class="line">  <span class="selector-tag">TCP</span>    127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1059</span>         0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       4220</div><div class="line">  <span class="selector-tag">TCP</span>    127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1080</span>         127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:1760</span>         <span class="selector-tag">ESTABLISHED</span>     4932</div></pre></td></tr></table></figure>
+</li>
+<li><p>查询特定端口：<code>netstat -ano | findstr &quot;1080&quot;</code></p>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><div class="line"><span class="symbol">C:</span>\Users\zqwang&gt;netstat -ano | findstr <span class="string">"1080"</span></div><div class="line">  TCP    <span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span>:<span class="number">1080</span>           <span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span>:<span class="number">0</span>              LISTENING       <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1760</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1762</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1837</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1839</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1959</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1961</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1963</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1965</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2038</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2040</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2278</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2280</span>         ESTABLISHED     <span class="number">4932</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1760</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">5568</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1762</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">1712</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1837</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">5568</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1839</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">1712</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1959</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">5568</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1961</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">1712</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1963</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">5568</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1965</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">1712</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2038</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">5568</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2040</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">1712</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2278</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">5568</span></div><div class="line">  TCP    <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">2280</span>         <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span>         ESTABLISHED     <span class="number">1712</span></div><div class="line">  UDP    <span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span>:<span class="number">1080</span>           *:*                                    <span class="number">4932</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>查询进程PID对应的程序名称：<code>tasklist | findstr &quot;4932&quot;</code></p>
+<figure class="highlight mathematica"><table><tr><td class="code"><pre><div class="line"><span class="keyword">C</span>:\Users\zqwang&gt;tasklist | findstr <span class="string">"4932"</span></div><div class="line">Shadowsocks.exe               <span class="number">4932</span> Console                    <span class="number">1</span>      <span class="number">4</span>,<span class="number">576</span> <span class="keyword">K</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>终止进程：<code>taskkill /pid 4932 /F</code></p>
+<figure class="highlight taggerscript"><table><tr><td class="code"><pre><div class="line">C:<span class="symbol">\U</span>sers<span class="symbol">\z</span>qwang&gt;taskkill /pid 4932 /F</div><div class="line">成功: 已终止 PID 为 4932 的进程。</div><div class="line"></div><div class="line">C:<span class="symbol">\U</span>sers<span class="symbol">\z</span>qwang&gt;tasklist | findstr "4932"</div><div class="line"></div><div class="line">C:<span class="symbol">\U</span>sers<span class="symbol">\z</span>qwang&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>再次查询4932，结果为空。<br><a id="more"></a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> windows </tag>
+            
+            <tag> 端口 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[VMware中的交换机]]></title>
+      <url>http://zhiqiang.space/2016/08/03/VMware%E4%B8%AD%E7%9A%84%E4%BA%A4%E6%8D%A2%E6%9C%BA/</url>
+      <content type="html"><![CDATA[<h1 id="虚拟网络"><a href="#虚拟网络" class="headerlink" title="虚拟网络"></a>虚拟网络</h1><p>虚拟网络是VMware中非常重要的概念，并且不太好理解。虚拟网络是干什么的呢？虚拟网络就是连接虚拟机和实际物理网卡。它是怎么连接的呢？就是通过虚拟交换机。</p>
+<h1 id="虚拟交换机的作用"><a href="#虚拟交换机的作用" class="headerlink" title="虚拟交换机的作用"></a>虚拟交换机的作用</h1><p>可以理解为虚拟机的网口和实际的物理网卡的网口都连接到了虚拟交换机上，这样虚拟机就可以通过物理网卡访问外部网络，或者访问别的虚拟机，管理员管理虚拟机，物理机之间做虚拟机的迁移，将多个物理网卡整合成一个网卡，并且平衡他们直接的流量和故障切换这些都得通过虚拟交换机连接来实现。<br><img src="vswitch1.png" alt=""></p>
+<h1 id="虚拟交换机的分类"><a href="#虚拟交换机的分类" class="headerlink" title="虚拟交换机的分类"></a>虚拟交换机的分类</h1><h2 id="标准交换机"><a href="#标准交换机" class="headerlink" title="标准交换机"></a>标准交换机</h2><p>重点理解标准交换机，标准交换机就是在单个物理机里配置的交换机。</p>
+<h2 id="分布式交换机"><a href="#分布式交换机" class="headerlink" title="分布式交换机"></a>分布式交换机</h2><p>这个分布式交换机就是在多个物理机里配置的交换机了，注意是为了在物理机很多的情况下可以方便快速的配置交换机，同时在虚拟机迁移时能正常迁移，避免迁移到另外一台物理机上时虚拟的网络就不通了。其实跟标准交换机一样，就是配置的时候同时配置多个物理机而已。</p>
+<h1 id="虚拟交换机端口的分类"><a href="#虚拟交换机端口的分类" class="headerlink" title="虚拟交换机端口的分类"></a>虚拟交换机端口的分类</h1><h2 id="vmkernel端口"><a href="#VMkernel端口：" class="headerlink" title="VMkernel端口："></a>VMkernel端口：</h2><ol>
+<li>用于ip-san的存储</li>
+<li>vMotion迁移</li>
+<li>ESXi的管理网</li>
+</ol>
+<h2 id="虚拟机端口"><a href="#虚拟机端口：" class="headerlink" title="虚拟机端口："></a>虚拟机端口：</h2><p>就是连接虚拟机的端口啦。而且还可以在这上面划Vlan，真是屌啊。</p>
+<p><img src="vport.png" alt=""></p>
+<h1 id="虚拟交换机的连接方式"><a href="#虚拟交换机的连接方式" class="headerlink" title="虚拟交换机的连接方式"></a>虚拟交换机的连接方式</h1><p>VMware中有许多种网络了，有管理网，生产网即业务网，vMotion用的网，ip存储用的网等，这些网络可以接到一台虚拟交换机上，也可以分别接到不通的虚拟交换机上，当然了，我们肯定是推荐后者，互不干扰嘛。<br><img src="lianjiefangshi.png" alt=""></p>
+<h1 id="实际案例的拓扑结构"><a href="#实际案例的拓扑结构" class="headerlink" title="实际案例的拓扑结构"></a>实际案例的拓扑结构</h1><p>在这个案例中，一共有两个物理机，每个物理机有6个网卡，其中vmnic0是用作管理网，vmnic1是用作vMotion网，vmnic2和vmnic3绑定成一个口，用作生产网即实际使用过程中的业务网，vmnic4和vmnic5绑定，用作连接存储。<br><img src="tpjg.png" alt=""></p>
+<h1 id="配置界面"><a href="#配置界面" class="headerlink" title="配置界面"></a>配置界面</h1><p>下面是交换机的配置界面<br><img src="pzjm1.png" alt=""></p>
+<p>可以更改标准虚拟交换机上的端口数<br><img src="pzjm2.png" alt=""></p>
+<p>对于每个物理适配器，可以更改速度和双工设置。<br><img src="pzjm3.png" alt=""></p>
+<h1 id="标准虚拟交换机的策略设置"><a href="#标准虚拟交换机的策略设置" class="headerlink" title="标准虚拟交换机的策略设置"></a>标准虚拟交换机的策略设置</h1><p>标准虚拟交换机的策略包含三个方面：安全策略、流量调整的策略、网卡绑定的策略。<br><img src="celue.png" alt=""></p>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> VMware </tag>
+            
+            <tag> 交换机 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[VMware安装文件的分类]]></title>
+      <url>http://zhiqiang.space/2016/08/03/VMware%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E7%B1%BB/</url>
+      <content type="html"><![CDATA[<p><code>VMware-VMvisor-Installer-6.0.0.update01-3073146.x86_64.iso</code>文件，是ESXi ISO image (Includes VMware Tools)，是在物理机上安装的系统镜像。<br><img src="esxiiso.png" alt=""></p>
+<p><code>VMware-viclient-all-6.0.0-3562874.exe</code>是 VMware vSphere Client的安装文件。<br><img src="vsphere.png" alt=""></p>
+<p><code>VMware-VIMSetup-all-6.0.0-3634788.iso</code>是Windows版的VCenter安装镜像。<br><img src="vcenter.png" alt=""></p>
+<p><code>VMware-VCSA-all-6.0.0-3634788.iso</code>是集成了VCenter的一个linux系统，可以管理5个以下的物理机，50个以下的虚机。<br><img src="vcenter2.png" alt=""></p>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> VMware </tag>
+            
+            <tag> 虚拟化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MySQL学习笔记03]]></title>
+      <url>http://zhiqiang.space/2016/08/01/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/</url>
+      <content type="html"><![CDATA[<ol>
+<li>SQL 即Structured Query Language，结构化查询语言</li>
+<li>常用的SQL语句:<br><strong>SELECT UPDATE DELETE INSERT WHERE</strong></li>
+<li>建一个名为student的表，包含以下内容：<br>id|name|sexy|course|||</li>
+</ol>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MySQL学习笔记02]]></title>
+      <url>http://zhiqiang.space/2016/07/31/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/</url>
+      <content type="html"><![CDATA[<h1 id="远程连接数据库"><a href="#远程连接数据库" class="headerlink" title="远程连接数据库"></a>远程连接数据库</h1><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">mysql -h xxx.xxx.xxx.xxx -u root -p</div></pre></td></tr></table></figure>
+<h1 id="sql语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h1><h2 id="格式默认是大写必须以分号结尾"><a href="#格式：默认是大写，必须以分号结尾" class="headerlink" title="格式：默认是大写，必须以分号结尾"></a>格式：默认是大写，必须以分号结尾</h2><h2 id="显示数据库版本"><a href="#显示数据库版本" class="headerlink" title="显示数据库版本"></a>显示数据库版本</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT VERSION();</div></pre></td></tr></table></figure>
+<p><img src="selectversion.png" alt=""></p>
+<h2 id="显示现在日期"><a href="#显示现在日期" class="headerlink" title="显示现在日期"></a>显示现在日期</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT CURRENT_DATE;</div></pre></td></tr></table></figure>
+<p><img src="selectcurrentdate.png" alt=""></p>
+<h2 id="显示计算结果"><a href="#显示计算结果" class="headerlink" title="显示计算结果"></a>显示计算结果</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT 4+4;</div></pre></td></tr></table></figure>
+<p><img src="select44.png" alt=""></p>
+<h2 id="显示所有数据库"><a href="#显示所有数据库" class="headerlink" title="显示所有数据库"></a>显示所有数据库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SHOW DATABASES;</div></pre></td></tr></table></figure>
+<p><img src="showdatabases.png" alt=""></p>
+<h2 id="创建一个数据库"><a href="#创建一个数据库" class="headerlink" title="创建一个数据库"></a>创建一个数据库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE DATABASE school;</div></pre></td></tr></table></figure>
+<p><img src="createdatabase.png" alt=""></p>
+<h2 id="删除一个数据库"><a href="#删除一个数据库" class="headerlink" title="删除一个数据库"></a>删除一个数据库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DROP DATABASE school;</div></pre></td></tr></table></figure>
+<p><img src="dropdatabase.png" alt=""></p>
+<h2 id="切换当前操作的数据库"><a href="#切换当前操作的数据库" class="headerlink" title="切换当前操作的数据库"></a>切换当前操作的数据库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">USE school;</div></pre></td></tr></table></figure>
+<p><img src="use.png" alt=""></p>
+<h2 id="不能修改数据库的名字"><a href="#不能修改数据库的名字" class="headerlink" title="不能修改数据库的名字"></a>不能修改数据库的名字</h2><a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MySQL学习笔记01]]></title>
+      <url>http://zhiqiang.space/2016/07/31/MySql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/</url>
+      <content type="html"><![CDATA[<p>视频地址：<a href="http://edu.51cto.com/course/course_id-1418.html" target="_blank" rel="external">MySQL数据库零基础入门视频课程</a></p>
+<hr>
+<h1 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h1><p>MySql分商业版和社区版，其中社区版是免费的。在MySql的官网<a href="www.mysql.com">www.mysql.com</a>都可以下载到。<br>一般安装的是社区版。<br><img src="mysql_community.png" alt=""></p>
+<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><p>1.首先查看一下都有哪些关于的MySQL的安装包</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><div class="line">$ yum <span class="keyword">list</span> | <span class="keyword">grep</span> mysql</div></pre></td></tr></table></figure>
+<p>输出结果如下：<br><img src="yumlistgrepmysql.png" alt=""></p>
+<p>其中mysql.x86_64是mysql的客户端程序，有了他就能远程连接别的机器上的MySQL数据库；mysql-server.x86_64是MySQL的服务器端程序，有了他才能在本机上建数据库。mysql-devel.x86_64和mqsql_lib.x86_64是MySQL的开发必备的组件。所有这四个都需要安装。</p>
+<p>2.通过yum install命令安装以上四个程序。<br><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">$ yum install mysql<span class="selector-class">.x86_64</span> mysql-server<span class="selector-class">.x86_64</span> mysql-devel<span class="selector-class">.x86_64</span> mqsql_lib.x86_64</div></pre></td></tr></table></figure></p>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>刚安装完MySQL，需要先将服务起来：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ service mysqld start</div></pre></td></tr></table></figure>
+<p>此时会弹出一些MySQL初始化的信息。只是第一次安装完成后启动服务才会弹出这么多信息，以后启动mysqld服务的时候不会弹这么多信息。</p>
+<h1 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h1><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ mysqladmin -u root password <span class="string">'newpassword'</span></div></pre></td></tr></table></figure>
+<h1 id="登录mysql及登出"><a href="#登录MySQL及登出" class="headerlink" title="登录MySQL及登出"></a>登录MySQL及登出</h1><h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ mysql -u root -p</div></pre></td></tr></table></figure>
+<h2 id="登出"><a href="#登出" class="headerlink" title="登出"></a>登出</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mysql&gt; quit</div></pre></td></tr></table></figure>
+<p><img src="loginmysql.png" alt=""></p>
+<h1 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ chkconfig mysqld on</div></pre></td></tr></table></figure>
+<h1 id="文件存放位置"><a href="#文件存放位置" class="headerlink" title="文件存放位置"></a>文件存放位置</h1><h2 id="数据库文件的存放位置"><a href="#数据库文件的存放位置" class="headerlink" title="数据库文件的存放位置"></a>数据库文件的存放位置</h2><p><code>/var/lib/mysql/xxx/</code> 其中xxx是数据库的名称</p>
+<h2 id="日志文件的存放位置"><a href="#日志文件的存放位置" class="headerlink" title="日志文件的存放位置"></a>日志文件的存放位置</h2><p><code>/var/logmysqld.log</code><br>可以通过<code>show databases</code>查看已有数据库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">show databases;</div></pre></td></tr></table></figure>
+<p>不要忘记分号！<br><img src="showdatabases.png" alt=""></p>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[如何使用Hexo的草稿功能]]></title>
+      <url>http://zhiqiang.space/2016/07/30/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E8%8D%89%E7%A8%BF%E5%8A%9F%E8%83%BD/</url>
+      <content type="html"><![CDATA[<p>Hexo是一个快速、简洁、高效的博客框架，可以帮助我们快速生成静态网页。</p>
+<p>一般使用Hexo发布一篇文章的过程是这样的：</p>
+<ol>
+<li>新建文章: <code>hexo new &lt;title&gt;</code> 在/source/_post/下新建一个title.md的文件</li>
+<li>编译md文件：<code>hexo generate</code></li>
+<li>部署： <code>hexo deploy</code></li>
+</ol>
+<hr>
+<p>但是我们有时候同时在写几篇文章，当有的文章未写完时，也一并被发布上去了。</p>
+<p>Hexo具有草稿的概念，新建文章时使用<code>hexo new draft &lt;title&gt;</code>会在/sourse/_draft/下新建一个title.md的文件。使用<code>hexo generate</code>时，并不会编译_drafts下的文件，所以<code>hexo deploy</code>时不会将其部署到github上。</p>
+<p>将草稿变成正式文章： <code>hexo publish &lt;title&gt;</code>原理就是将文件从_drafts文件夹移到_post文件夹，如果需要将文章变成草稿，将其移回即可。</p>
+<p>本机预览草稿： <code>hexo server --draft</code></p>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[迅雷导致SS时断时续的问题]]></title>
+      <url>http://zhiqiang.space/2016/07/29/%E8%BF%85%E9%9B%B7%E5%AF%BC%E8%87%B4SS%E6%97%B6%E6%96%AD%E6%97%B6%E7%BB%AD%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>最近今天SS一直不稳定，经常连不上Google，查看日志发现有大量以下的报错：</p>
+<blockquote>
+<p>System.Net.Sockets.SocketException (0x80004005):<br>由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。</p>
+</blockquote>
+<p><img src="https://i.v2ex.co/MB10gEw3l.png" alt="ss报错"></p>
+<p>通过Google该问题发现，之前已经有不少前辈遇到过，应该是迅雷的端口占用了ss端口，导致ss不能正常使用。</p>
+<p>原贴连接：<a href="http://www.gznf.net/thread-544318-1-1.html" title="http://www.gznf.net/thread-544318-1-1.html" target="_blank" rel="external">http://www.gznf.net/thread-544318-1-1.html</a></p>
+<p>解决方案如下：</p>
+<p>1.在我的电脑上右击打开“管理”，找到“服务”，在服务列表中停用和禁止XLServicePlatform。</p>
+<p><img src="https://i.v2ex.co/5uw9qcnml.png" alt="打开管理"></p>
+<p><img src="https://i.v2ex.co/GsPPp64Zl.png" alt="找到服务"></p>
+<p>2.打开注册表，定位到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XLServicePlatform，删除XLServicePlatform</p>
+<p>3.打开文件夹C:\Program Files\Common Files(x86)\Thunder Network\ServicePlatform，找到文件XLSP.dll,删除XLSP.dll，并新建一个0字节的txt文件，将其改为XLSP.dll<br><img src="https://i.v2ex.co/86T08y0Yl.png" alt="XLSP.dll"></p>
+<a id="more"></a>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> SS </tag>
+            
+            <tag> 翻墙 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
