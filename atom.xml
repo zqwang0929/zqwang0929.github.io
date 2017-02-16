@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhiqiang.space/"/>
-  <updated>2017-02-16T06:59:55.379Z</updated>
+  <updated>2017-02-16T07:07:22.162Z</updated>
   <id>http://zhiqiang.space/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://zhiqiang.space/2017/02/16/%E8%AE%A9Chrome%E7%9A%84%E6%93%8D%E4%BD%9C%E9%80%9F%E5%BA%A6%E5%BF%AB%E5%BE%97%E9%A3%9E%E8%B5%B7-Vimium%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/"/>
     <id>http://zhiqiang.space/2017/02/16/让Chrome的操作速度快得飞起-Vimium插件介绍/</id>
     <published>2017-02-16T05:48:29.000Z</published>
-    <updated>2017-02-16T06:59:55.379Z</updated>
+    <updated>2017-02-16T07:07:22.162Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="让chrome的操作速度快得飞起vimium插件介绍"><a href="#让Chrome的操作速度快得飞起–Vimium插件介绍" class="headerlink" title="让Chrome的操作速度快得飞起–Vimium插件介绍"></a>让Chrome的操作速度快得飞起–Vimium插件介绍</h2><p>Vimium是一款Chrome浏览器的插件，它能让你在浏览网页时抛弃鼠标，完全用键盘操作。看它的名字就知道，它是借鉴了linux下文本编辑的神器Vim的操作方式，使用键盘控制网页的上下翻页、选择和点击。如果你之前有使用Vim的经验，那你肯定能快速上手。如果你是一个装逼少年或者懒癌晚期，那我强烈推荐你使用它解放右手。</p>
+    <content type="html"><![CDATA[<p>Vimium是一款Chrome浏览器的插件，它能让你在浏览网页时抛弃鼠标，完全用键盘操作。看它的名字就知道，它是借鉴了linux下文本编辑的神器Vim的操作方式，使用键盘控制网页的上下翻页、选择和点击。如果你之前有使用Vim的经验，那你肯定能快速上手。如果你是一个装逼少年或者懒癌晚期，那我强烈推荐你使用它解放右手。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h3><p>安装肯定是在谷歌商店安装了: <a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb" target="_blank" rel="external">https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb</a>  什么？你说你打不开，那请先出门右拐搜索一个怎么科（fan）学（qiang）上网。<img src="sp20170207_224831.jpg" alt="sp20170207_224831"></p>
 <h3 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a><strong>帮助</strong></h3><p>当你安装好Vimium之后，按？（即Shift+/）会弹出帮助界面。<img src="sp20170207_225554.jpg" alt="sp20170207_225554"></p>
 <h3 id="滚动页面"><a href="#滚动页面" class="headerlink" title="滚动页面"></a><strong>滚动页面</strong></h3><p>j：向下滚动窗口；k：向上滚动窗口；h：向左滚动窗口；l：向右滚动窗口；</p>
@@ -42,7 +42,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;让chrome的操作速度快得飞起vimium插件介绍&quot;&gt;&lt;a href=&quot;#让Chrome的操作速度快得飞起–Vimium插件介绍&quot; class=&quot;headerlink&quot; title=&quot;让Chrome的操作速度快得飞起–Vimium插件介绍&quot;&gt;&lt;/a&gt;让Chrom
+      &lt;p&gt;Vimium是一款Chrome浏览器的插件，它能让你在浏览网页时抛弃鼠标，完全用键盘操作。看它的名字就知道，它是借鉴了linux下文本编辑的神器Vim的操作方式，使用键盘控制网页的上下翻页、选择和点击。如果你之前有使用Vim的经验，那你肯定能快速上手。如果你是一个装逼少年或
     
     </summary>
     
