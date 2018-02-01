@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[服务器常见得Intel CPU的发展历程]]></title>
+      <url>http://zhiqiang.space/2018/02/01/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9A%84Intel-CPU%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<p>介绍一下服务器上常见的Intel CPU的发展历程以及区别。</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[让Chrome的操作速度快得飞起--Vimium插件介绍]]></title>
       <url>http://zhiqiang.space/2017/02/16/%E8%AE%A9Chrome%E7%9A%84%E6%93%8D%E4%BD%9C%E9%80%9F%E5%BA%A6%E5%BF%AB%E5%BE%97%E9%A3%9E%E8%B5%B7-Vimium%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
       <content type="html"><![CDATA[<p>Vimium是一款Chrome浏览器的插件，它能让你在浏览网页时抛弃鼠标，完全用键盘操作。看它的名字就知道，它是借鉴了linux下文本编辑的神器Vim的操作方式，使用键盘控制网页的上下翻页、选择和点击。如果你之前有使用Vim的经验，那你肯定能快速上手。如果你是一个装逼少年或者懒癌晚期，那我强烈推荐你使用它解放右手。</p>
