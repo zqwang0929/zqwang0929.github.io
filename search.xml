@@ -6,8 +6,8 @@
     <entry>
       <title><![CDATA[服务器常见得Intel CPU的发展历程]]></title>
       <url>http://zhiqiang.space/2018/02/01/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9A%84Intel-CPU%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/</url>
-      <content type="html"><![CDATA[<p>介绍一下服务器上常见的Intel CPU的发展历程以及区别。<br> Romaly平台：内存是DDR3  32nm的是SandyBridge，22nm的是IvyBridge</p>
-<p>Grantly平台：内存是DDR4  22nm的是Haswell，V3；14nm的是Broadwell，V4；</p>
+      <content type="html"><![CDATA[<p>介绍一下服务器上常见的Intel CPU的发展历程以及区别。<br> Romley平台：内存是DDR3  32nm的是SandyBridge，22nm的是IvyBridge</p>
+<p>Grantley平台：内存是DDR4  22nm的是Haswell，V3；14nm的是Broadwell，V4；</p>
 <p>Purley平台：都是14nm，Skylake和Kabylake。后者的主频更高。</p>
 <p><img src="http://on-img.com/chart_image/5a7d3e6de4b0874437c3a443.png" alt=""></p>
 ]]></content>
